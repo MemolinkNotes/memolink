@@ -1,6 +1,7 @@
 <script>
   export let name = "";
   export let img = "https://picsum.photos/1000/1000"
+  export let func = () => { };
   let greetings = [
     "Hey, {name}",
     "Hi, {name}",
@@ -17,7 +18,7 @@
 
   let timeSensitiveGreetings = [
     "Good morning, {name}",
-    "Good afternoon, {name}",
+    "Afternoon, {name}",
     "Good evening, {name}",
     "Good night, {name}",
   ]
@@ -25,9 +26,13 @@
     let date = new Date();
     let hour = date.getHours();
 
-    let greeting = greetings[Math.floor(Math.random() * greetings.length)].replace("{name}", name);
+    let greeting = "Hi, " + name;
     
-   if (Math.random() < 0.5) {
+    let doCustomGreeting = Math.random() < 0.5;
+    if (doCustomGreeting) {
+    greeting = greetings[Math.floor(Math.random() * greetings.length)].replace("{name}", name);
+    
+   if (Math.random() < 0.8) {
     console.log("Time sensitive greeting")
     if (hour < 12) {
         greetings = timeSensitiveGreetings.slice(0, 1);
@@ -40,9 +45,11 @@
     }
     greeting = greetings[0]
    }
+  }
 
    greeting = greeting.replace("{name}", name);
 
+   var isNewNoteDialogOpen = false;
    function newNote() {
     // make button flash
     let button = document.getElementsByClassName("button")[0];
@@ -54,6 +61,7 @@
     }, 100);
 
     // open dialog
+    func();
    }
 </script>
 

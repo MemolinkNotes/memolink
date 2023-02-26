@@ -1,11 +1,13 @@
 <script>
   import Header from "./otc/Header.svelte";
   import Note from "./lib/Note.svelte";
+  import NewNoteDialog from "./otc/NewNoteDialog.svelte";
 
   let notes = []
   let morePages = true
   let page = 0
   let maxPage = 0
+  var isNewNoteDialogOpen = false;
 
   // TODO grab notes from backend
     function getNotes(pageNumber) {
@@ -109,11 +111,36 @@
 
     loadNotes();
 
+    function closeDialog() {
+        var r = document.querySelector("#dialog_darken");
+        document.documentElement.style.setProperty('--dialog-vis', 'hidden')
+        // @ts-ignore
+        r.style.visibility = "hidden";
+    }
+
+    function openDialog() {
+        var r = document.querySelector("#dialog_darken");
+        // @ts-ignore
+        r.style.visibility = "visible";
+    }
+
+    function openNewNoteDialog() {
+        if (isNewNoteDialogOpen) {
+            closeDialog();
+            isNewNoteDialogOpen = false;
+            document.documentElement.style.setProperty('--dialog-vis', 'hidden')
+            return;
+        }
+        isNewNoteDialogOpen = true;
+        openDialog();
+        document.documentElement.style.setProperty('--dialog-vis', 'visible')
+    }
+
 </script>
 
 <div class="fullpage">
 <main>
-    <Header name = "Seailz" />
+    <Header name = "Seailz" func = {openNewNoteDialog} />
     <div class="notes">
         <!-- When not loaded yet, (or the notes array is empty), then put a loading icon -->
 
@@ -153,13 +180,29 @@
         </div>
         {/if}
     </div>
+
+    <button style="visibility: {isNewNoteDialogOpen ? "visible" : "hidden"};" on:click={closeDialog} id="dialog_darken"></button>
+    <NewNoteDialog open={isNewNoteDialogOpen} />
 </main>
 </div>
 
 <style>
 
+#dialog_darken {
+    background-color: rgba(0,0,0,0.5);
+    position:fixed;
+    left:0;
+    top: 0;
+    width:100%;
+    height:100%;
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    /*visibility: hidden;*/
+}
+
 .no_select {
-    -webkit-user-select: none; /* Safari */
+  -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
 }
