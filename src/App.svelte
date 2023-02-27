@@ -3,6 +3,9 @@
   import Note from "./lib/Note.svelte";
   import NewNoteDialog from "./otc/NewNoteDialog.svelte";
 
+  export let name = "";
+  export let avatar = "https://picsum.photos/200/300"
+
   let notes = []
   let morePages = true
   let page = 0
@@ -136,11 +139,49 @@
         document.documentElement.style.setProperty('--dialog-vis', 'visible')
     }
 
+    const hash = window.location.hash
+const urlParams = new URLSearchParams(hash.substring(1))
+    var token = "";
+
+if (urlParams.has('access_token')) {
+  token = urlParams.get('access_token')
+  document.cookie = `token=${token}`
+} else if (document.cookie) {
+  token = document.cookie.split('=')[1]
+}
+// send request to discord to validate token
+// if valid, render app
+// if not valid, render not logged in page
+const xhr = new XMLHttpRequest()
+xhr.open('GET', 'https://discordapp.com/api/users/@me')
+xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+xhr.send()
+// dont run async
+
+var canRenderHeader = false;
+
+xhr.onload = () => {
+  if (xhr.status === 200) {
+    // render app
+    avatar = `https://cdn.discordapp.com/avatars/${JSON.parse(xhr.response).id}/${JSON.parse(xhr.response).avatar}.png`
+    name = JSON.parse(xhr.response).username
+    console.log(JSON.parse(xhr.response).username)
+    canRenderHeader = true;
+  } else {
+    // render not logged in page
+    console.log('not logged in')
+  }
+}
+
+
 </script>
 
 <div class="fullpage">
 <main>
-    <Header name = "Seailz" func = {openNewNoteDialog} />
+    {#if canRenderHeader}
+    <Header name = "{name}" func = {openNewNoteDialog} img="{avatar}" />
+    {/if}
     <div class="notes">
         <!-- When not loaded yet, (or the notes array is empty), then put a loading icon -->
 

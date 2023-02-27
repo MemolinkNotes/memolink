@@ -17,9 +17,9 @@
   ]
 
   let timeSensitiveGreetings = [
-    "Good morning, {name}",
+    "Morning, {name}",
     "Afternoon, {name}",
-    "Good evening, {name}",
+    "Evening, {name}",
     "Good night, {name}",
   ]
 

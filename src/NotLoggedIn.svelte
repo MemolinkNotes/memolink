@@ -1,7 +1,7 @@
 <main>
     <div class="center">
         <h1>Please log in</h1>
-        <a class="withdiscord" href="https://discord.com/api/oauth2/authorize?client_id=1079489475165573170&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Flogin%2Fdiscord&response_type=code&scope=identify%20email%20relationships.read">
+        <a class="withdiscord" href="https://discord.com/api/oauth2/authorize?client_id=1079489475165573170&redirect_uri=http%3A%2F%2F127.0.0.1%3A5174%2F&response_type=token&scope=identify%20email">
             Discord
         </a>
     </div>
@@ -44,5 +44,12 @@
         cursor: pointer;
         margin-left: 30%;
         text-underline-offset: 9000px;
+        transition-property: all;
+        transition-duration: 0.5s;
+    }
+
+    .withdiscord:hover {
+        background-color: rgba(0, 0, 0, 0.25);
+        letter-spacing: 0.2px;
     }
 </style>

@@ -3,27 +3,42 @@ import App from './App.svelte'
 import NotLoggedIn from './NotLoggedIn.svelte'
 
 // check search params & cookies for a token
-const urlParams = new URLSearchParams(window.location.search)
+const hash = window.location.hash
+const urlParams = new URLSearchParams(hash.substring(1))
+console.log(hash)
+console.log(urlParams.get('access_token'))
 var token = "";
 
-if (urlParams.has('token')) {
-  token = urlParams.get('token')
-  document.cookie = `token=${token}`
+if (urlParams.has('access_token')) {
+  token = urlParams.get('access_token')
+
+  var expires = (new Date(Date.now()+ 604800*1000)).toUTCString();
+  document.cookie = "discordtoken=" + token + "; expires=" + expires + ";path=/;"
+
 } else if (document.cookie) {
   token = document.cookie.split('=')[1]
 }
+// send request to discord to validate token
+// if valid, render app
+// if not valid, render not logged in page
+const xhr = new XMLHttpRequest()
+xhr.open('GET', 'https://discordapp.com/api/users/@me')
+xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+xhr.send()
 
 var app = null;
-// TODO validate token
-var tokenValid = false
-if (!tokenValid) {
-  app = new NotLoggedIn({
-    target: document.getElementById('app'),
-  })
-} else {
-  app = new App({
-    target: document.getElementById('app'),
-  })
+xhr.onload = function() {
+  if (xhr.status != 200) {
+    app = new NotLoggedIn({
+      target: document.getElementById('app'),
+    })
+  } else {
+    app = new App({
+      target: document.getElementById('app'),
+    })
+
+  }
 }
 
 export default app
