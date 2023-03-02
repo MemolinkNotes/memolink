@@ -11,7 +11,7 @@
     @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
     main {
         width: 100%;
-        height: 50%;
+        height: 100%;
         padding: 0px;
         margin: 0px;
         background: linear-gradient(0deg, rgba(224,173,221,1) 0%, rgba(147,123,255,1) 2%, rgba(134,255,246,1) 100%);
