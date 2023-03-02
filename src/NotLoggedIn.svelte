@@ -1,7 +1,7 @@
 <main>
     <div class="center">
         <h1>Please log in</h1>
-        <a class="withdiscord" href="https://discord.com/api/oauth2/authorize?client_id=1079489475165573170&redirect_uri=http%3A%2F%2F127.0.0.1%3A5174%2F&response_type=token&scope=identify%20email">
+        <a class="withdiscord" href="https://discord.com/api/oauth2/authorize?client_id=1079489475165573170&redirect_uri=http%3A%2F%2F127.0.0.1%3A5173%2F&response_type=token&scope=identify%20email">
             Discord
         </a>
     </div>

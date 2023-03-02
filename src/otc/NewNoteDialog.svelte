@@ -17,13 +17,59 @@
 <div class="dialog_container">
     <div class="dialog" id="dialog">
         <section class="dialog_title">
-            <input type="text" maxlength="100" id="title-input" name="title" value="{title}">
+            <input type="text" maxlength="45" id="title-input" name="title" placeholder="{title}">
             <hr>
+        </section>
+        <section class="dialog_content">
+            <textarea maxlength="4000" class="content" name="content" id="content-input" cols="30" rows="10"></textarea>
+            <hr>
+        </section>
+        <section class="dialog_buttons" style="display:inline;">
+            <div class="left_dialog_buttons">
+                <button class="close">Close</button>
+            </div>
         </section>
     </div>
 </div>
 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+    @import url('https://fonts.cdnfonts.com/css/google-sans');
+
+    .dialog_buttons {
+        float: right;
+        height: 7.5%;
+        margin-top: 25px;
+        width: 100%;
+    }
+
+    .close {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        color: #1e1e1e;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        letter-spacing: .01785714em;
+        font-family: "Google Sans",Roboto,Arial,sans-serif;
+        font-size: .875rem;
+        font-weight: 500;
+        line-height: 1.25rem;
+        height: 36px;
+        padding: 8px 24px;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        border: none;
+    }
+
+    .close:hover {
+        background-color: #2e2e2e24;
+        cursor: pointer;
+    }
+
+    .left_dialog_buttons {
+        float: left;
+    }
 
     .dialog_container {
         position: absolute;
@@ -52,8 +98,27 @@
         outline: none;
         width: 100%;
         font-size: 1.5em;
-        font-weight: 800;
+        font-weight: 450;
     }
+
+    .dialog_content {
+        margin-top: 10px;
+        height: 80%;
+    }
+
+    .content {
+        font-family: 'Poppins', sans-serif;
+        margin-top: 0px;
+        background: none;
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 100%;
+        resize: none;
+        font-size: 1em;
+        font-weight: 450;                
+    }
+
 
     h1 {
         margin-top: 0px;
