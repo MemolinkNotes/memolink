@@ -45,11 +45,11 @@
         </section>
         <section class="dialog_buttons" style="display:inline;">
             <div class="left_dialog_buttons">
-                <button class="button close" on:click={save}>
+                <button title="Save" aria-label="Save" class="button close" on:click={save}>
                     <p class="material-icons">save</p>
                 </button>
-                <button class="button icon">
-                    <p class="material-icons">add_reaction</p>
+                <button title="Change Icon" aria-label="Change Icon" class="button icon">
+                    <p class="material-icons icon-icon">add_reaction</p>
                 </button>
             </div>
         </section>
