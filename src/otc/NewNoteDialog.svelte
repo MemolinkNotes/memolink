@@ -2,6 +2,11 @@
     export let title = "Untitled";
     export let open = false;
 
+    var contentPlaceholder = "Write something here..."
+    var content = "";
+
+    var icon = "bookmark";
+
     var visStyle = "hidden";
 
     if (open) {
@@ -10,23 +15,42 @@
         visStyle = "hidden";
     }
 
+    function save() {
+        if (title == "") {
+            title = "Untitled";
+        }
+
+        if (content == "") {
+            contentPlaceholder = "Please write something here to save."
+            return;
+        }
+
+
+    }
+
     console.log(open)
     document.documentElement.style.setProperty('--dialog-vis', visStyle);
 </script>
 
 <div class="dialog_container">
     <div class="dialog" id="dialog">
-        <section class="dialog_title">
-            <input type="text" maxlength="45" id="title-input" name="title" placeholder="{title}">
+        <section class="dialog_title" style="display:inline;">
+            
+            <input bind:value={title} type="text" maxlength="45" id="title-input" name="title" placeholder="{title}">
             <hr>
         </section>
         <section class="dialog_content">
-            <textarea maxlength="4000" class="content" name="content" id="content-input" cols="30" rows="10"></textarea>
+            <textarea bind:value={content} maxlength="4000" class="content" placeholder="{contentPlaceholder}" name="content" id="content-input" cols="30" rows="10"></textarea>
             <hr>
         </section>
         <section class="dialog_buttons" style="display:inline;">
             <div class="left_dialog_buttons">
-                <button class="close">Close</button>
+                <button class="button close" on:click={save}>
+                    <p class="material-icons">save</p>
+                </button>
+                <button class="button icon">
+                    <p class="material-icons">add_reaction</p>
+                </button>
             </div>
         </section>
     </div>
@@ -39,30 +63,44 @@
     .dialog_buttons {
         float: right;
         height: 7.5%;
-        margin-top: 25px;
+        margin-top: 22px;
         width: 100%;
+        display: inline;
     }
 
     .close {
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        color: #1e1e1e;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        letter-spacing: .01785714em;
-        font-family: "Google Sans",Roboto,Arial,sans-serif;
-        font-size: .875rem;
-        font-weight: 500;
-        line-height: 1.25rem;
-        height: 36px;
-        padding: 8px 24px;
-        -webkit-border-radius: 4px;
-        border-radius: 4px;
+        background-color: transparent;
         border: none;
+        color: #000000;
+        outline: none;
+        margin: 0px;
+        padding: 0px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        float: right;
+        margin-left: 470px;
     }
 
-    .close:hover {
+    .button {
+        background-color: transparent;
+        border: none;
+        color: #000000;
+        outline: none;
+        margin: 0px;
+        padding: 0px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin-right: 5px;
+    }
+
+    .material-icons {
+        margin: 0px!important;
+        display: inline;
+    }
+
+    .button:hover {
         background-color: #2e2e2e24;
         cursor: pointer;
     }
@@ -99,6 +137,7 @@
         width: 100%;
         font-size: 1.5em;
         font-weight: 450;
+        display: inline;
     }
 
     .dialog_content {
