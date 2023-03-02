@@ -12,9 +12,12 @@
     main {
         width: 100%;
         height: 100%;
-        padding: 0px;
-        margin: 0px;
-        background: linear-gradient(0deg, rgba(224,173,221,1) 0%, rgba(147,123,255,1) 2%, rgba(134,255,246,1) 100%);
+        background: linear-gradient(0deg, rgba(224,173,221,1) 0%, rgba(255,204,134,1) 100%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
     }
 
     h1 {
