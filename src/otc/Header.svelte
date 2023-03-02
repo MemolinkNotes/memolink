@@ -145,7 +145,6 @@
     color: white;
     font-size: 50px;
     vertical-align: middle;
-    /* set anchor point to center of element for transition */
     transform-origin: center center 0 0 0 0;
     transition-property: all;
     transition-duration: 500ms;
@@ -153,10 +152,7 @@
   }
 
   h1:hover {
-    /* on hover, change font size */
-    font-size: 50.2px;
     text-shadow: 0px 0px 70px rgba(0, 0, 0, 0.932);
-    letter-spacing: .5px;
   }
 
   .button_icon {
